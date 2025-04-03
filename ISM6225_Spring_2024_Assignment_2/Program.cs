@@ -158,11 +158,28 @@ namespace Assignment_2
 
 
         // Question 3: Two Sum
+        // Initial Thought Two numbers sums means that if we subtract one of the numbers from the target then the other number should be equal to the target.
+        // Then we can check if that is present in the array or not. If it is present, we can return the index of the two numbers.
+        // We can use a dictionary to store the numbers and their indices.
+        // We then loop through the length of the given array and check if the number is present in the dictionary or not.
+        // If it is present, we can return the index of the two numbers.
+        // If it is not present, we can add the number to the dictionary and continue.
+        // We can also check if the target is less than 0 or not. If it is less than 0, we can return an empty array.
         public static int[] TwoSum(int[] nums, int target)
         {
             try
             {
-                // Write your code here
+                Dictionary<int, int> newDict = new Dictionary<int, int>();
+                for(int i = 0; i < nums.Length; i++)
+                {
+                    int com = target - nums[i];
+                    if (newDict.ContainsKey(com))
+                    {
+                        return new int[] { newDict[com], i };
+                    }
+                    newDict[nums[i]] = i;
+                }
+                Console.WriteLine($"No two sum solution found for target {target}");
                 return new int[0]; // Placeholder
             }
             catch (Exception)
@@ -170,6 +187,8 @@ namespace Assignment_2
                 throw;
             }
         }
+        // The time complexity of this solution is O(n) because we are looping through the length of the given array and checking if the number is present in the dictionary or not.
+        // space complexity is O(n) because we are using a dictionary to store the numbers and their indices.
 
         // Question 4: Find Maximum Product of Three Numbers
         public static int MaximumProduct(int[] nums)

@@ -58,7 +58,11 @@ namespace Assignment_2
         }
 
         // Question 1: Find Missing Numbers in Array
-        // Initial thought was to create an arraylist as it is dynamic in size since we don't know how many numbers are missing. But a more efficient way is to use a HashSet.
+        // Initial thought create an arraylist as it is dynamic in size since we don't know how many numbers are missing.
+        // We can loop through the length of the given array and check if the number is present in the array or not.
+        // If it is not present, we can add it to the arraylist of missing numbers. Then return the arraylist of missing numbers.
+        // But a more efficient way is to use a HashSet.
+        // first checking if the array is null or empty and returning an empty list
         // What is a hashset? This allows us to store only the unique elements which are present in the given array. Discarding the duplicates
         // After discrading the duplicates, we can loop through the length of the given array and check if the number is present in the hashset or not.
         // If it is not present, we can add it to a LIST of missing numbers.
@@ -67,6 +71,11 @@ namespace Assignment_2
         {
             try
             {
+                // checking if the array is null or empty and returning an empty list
+                if (nums == null || nums.Length == 0)
+                {
+                    return new List<int>(); // Return an empty list if the array is null or empty
+                }
                 int n = nums.Length;
                 // Using a HashSet to track numbers and the missing ones to return
                 HashSet<int> numSet = new HashSet<int>(nums);
@@ -83,6 +92,7 @@ namespace Assignment_2
                     }
                 }
                 // Returning the list of missing numbers
+                // if there are no missing elements in the given array, it will return an empty list
                 return missingNum;
             }
             // IF there are any exceptions, we are throwing the exception
@@ -91,23 +101,61 @@ namespace Assignment_2
                 throw;
             }
         }
+        // The time complexity of this solution is O(n) because we are looping through the length of the given array and checking if the number is present in the hashset or not.
+        // space complexity is O(n) because we are using a hashset to store the numbers and a list to store the missing numbers.
+
 
         // Question 2: Sort Array by Parity
+        // Initial Thought Create another array of the same size as the given array and loop through the length of the given array trying to find the even number If it is even, We move it to the next index of the the previous even number and the odd number is sent to the end of the array.
+        // creating two arrays increases the time complexity and space complexity. So a two pointer approach would be optimal.
+        // We can use two pointers, one starting from the beginning of the array and the other from the end.
+        // We can check if the left number is even, we can move to the next number. If the right number is odd, we can move to the previous number. If the left number is odd and the right number is even, we can swap them.
         public static int[] SortArrayByParity(int[] nums)
         {
             try
             {
-                // Using a List to store the even and odd numbers separately
-                //List<int> evenNumbers = new List<int>();
-                
+                // checking if the array is null or empty and returning the original array
+                if (nums == null || nums.Length == 0)
+                {
+                    return nums; // Return the original array if it's null or empty
+                }
+
+                int left = 0, right = nums.Length - 1;
+                while (left < right)
+                {
+                    // If the left number is even, we can move to the next number
+                    if (nums[left] % 2 == 0)
+                    {
+                        left++;
+                    }
+                    // If the right number is odd, we can move to the previous number
+                    else if (nums[right] % 2 != 0)
+                    {
+                        right--;
+                    }
+                    // If the left number is odd and the right number is even, we can swap them
+                    else
+                    {
+                        // Swap the left and right numbers
+                        int temp = nums[left];
+                        nums[left] = nums[right];
+                        nums[right] = temp;
+                        left++;
+                        right--;
+                    }
+                }
+
                 // Write your code here
-                return new int[0]; // Placeholder
+                return nums; // Placeholder
             }
             catch (Exception)
             {
                 throw;
             }
         }
+        // The time complexity of this solution is O(n) because we are looping through the length of the given array and checking if the number is even or odd.
+        // space complexity is O(1) because we are not using any extra space to store the numbers.
+
 
         // Question 3: Two Sum
         public static int[] TwoSum(int[] nums, int target)

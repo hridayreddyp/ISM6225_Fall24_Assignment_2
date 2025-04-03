@@ -201,26 +201,32 @@ namespace Assignment_2
         {
             try
             {
-                // checking if the array length is less than 3 or empty and returning the exception message
+                // Check if the array is null or has less than 3 elements
                 if (nums == null || nums.Length < 3)
                 {
-                    throw new ArgumentException("Array must contain at least three numbers.");
+                    throw new ArgumentException();
                 }
-                // Sorting the array
+
+                // Sort the array
                 Array.Sort(nums);
                 int n = nums.Length;
-                // The maximum product can be either the product of the last three numbers or the product of the first two numbers(if they are both negative) and the last number
-                int maxProduct = Math.Max(nums[n - 1] * nums[n - 2] * nums[n - 3], nums[0] * nums[1] * nums[n - 1]);
-                return maxProduct; // Placeholder
+
+                // Calculate the maximum product from either:
+                // - The product of the last three numbers
+                // - The product of the first two numbers (possibly negative) and the last number
+                int maxProduct = Math.Max(
+                    nums[n - 1] * nums[n - 2] * nums[n - 3],
+                    nums[0] * nums[1] * nums[n - 1]
+                );
+
+                return maxProduct;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // If there are any exceptions, we are throwing the exception
-                Console.WriteLine($"Error: {ex.Message}");
-                // Returning a default value
-                return int.MinValue;
+                throw;
             }
         }
+
         // The time complexity of this solution is O(n log n) because we are sorting the array and then finding the maximum product of the last three numbers.
         // space complexity is O(1) because we are not using any extra space to store the numbers.
 
@@ -234,59 +240,141 @@ namespace Assignment_2
             try
             {
                 if (decimalNumber < 0)
-                    throw new ArgumentException("Decimal number must be non-negative.");
+                {
+                    throw new ArgumentException();
+                }
+
                 // Using the built-in Convert.ToString method to convert the decimal number to binary
                 return Convert.ToString(decimalNumber, 2);
-            }
-            // If there are any exceptions, we are throwing the exception
-            catch (ArgumentException ex)
-            {
-                return $"Error: {ex.Message}";
-            }
-        }
-        // The time complexity of this solution is O(log n) because we are using the built-in Convert.ToString method to convert the decimal number to binary.
-        // space complexity is O(1) because we are not using any extra space to store the numbers.
-
-        // Question 6: Find Minimum in Rotated Sorted Array
-        public static int FindMin(int[] nums)
-        {
-            try
-            {
-                
-                return 0; // Placeholder
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        // The time complexity of this solution is O(log n) because we are using the built-in Convert.ToString method to convert the decimal number to binary.
+        // space complexity is O(1) because we are not using any extra space to store the numbers.
+
+        // Question 6: Find Minimum in Rotated Sorted Array
+        // Initial thought, We can use the binary search algorithm to find the minimum element in the rotated sorted array.
+        // We can check if the array is null or empty and return an error message.
+        //Then, we can use the binary search algorithm to find the minimum element in the rotated sorted array.
+        // We can check if the middle element is greater than the rightmost element. If it is, we can move to the right half of the array.
+        // If it is not, we can move to the left half of the array.
+        // We can also check if the leftmost element is less than the rightmost element. If it is, we can return the leftmost element.
+        public static int FindMin(int[] nums)
+        {
+            try
+            {
+                // Check if the array is null or empty
+                if (nums == null || nums.Length == 0)
+                {
+                    throw new ArgumentException("Array must not be null or empty.");
+                }
+
+                int left = 0, right = nums.Length - 1;
+
+                // Binary search to find the minimum in rotated sorted array
+                while (left < right)
+                {
+                    int mid = left + (right - left) / 2;
+
+                    // If middle element is greater than the rightmost, min is in right half
+                    if (nums[mid] > nums[right])
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        // Otherwise, it is in the left half (including mid)
+                        right = mid;
+                    }
+                }
+
+                // At the end of the loop, left == right, pointing to the minimum element
+                return nums[left];
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         // Question 7: Palindrome Number
         public static bool IsPalindrome(int x)
         {
             try
             {
-                // Write your code here
-                return false; // Placeholder
+                // Negative numbers are not palindromes
+                if (x < 0)
+                {
+                    return false;
+                }
+
+                int original = x; // Storing the original number
+                int reversed = 0; // Variable to hold the reversed number
+
+                // Reversing the number
+                while (x > 0)
+                {
+                    int digit = x % 10; // Getting the last digit
+                    reversed = reversed * 10 + digit; // Appending the digit to reversed
+                    x /= 10; // Removing the last digit from x
+                }
+
+                // Comparing the original and reversed number
+                return original == reversed;
             }
+            // If any exception occurs, rethrow it
             catch (Exception)
             {
                 throw;
             }
         }
+        // The time complexity of this solution is O(log n) because we are reversing the number and checking if it is a palindrome or not.
+        // space complexity is O(1) because we are not using any extra space to store the numbers.
+
 
         // Question 8: Fibonacci Number
+        //Initial thought, 
         public static int Fibonacci(int n)
         {
+            
             try
             {
-                // Write your code here
-                return 0; // Placeholder
+                if (n < 0)
+                {
+                    throw new ArgumentException("Input must be a non-negative integer.");
+                }
+                if (n == 0)
+                {
+                    return 0;
+                }
+                else if (n == 1)
+                {
+                    return 1;
+                }
+                // Using an iterative approach to calculate Fibonacci
+                int a = 0, b = 1, c = 0;
+                for (int i = 2; i <= n; i++)
+                {
+                    c = a + b; // Calculate the next Fibonacci number
+                    a = b; // Update a to the previous Fibonacci number
+                    b = c; // Update b to the current Fibonacci number
+                }
+                // Return the nth Fibonacci number
+
+                return b; // Placeholder
             }
             catch (Exception)
             {
                 throw;
             }
         }
+        // The time complexity of this solution is O(n) because we are using an iterative approach to calculate the Fibonacci number.
+        // space complexity is O(1) because we are not using any extra space to store the numbers.
+
     }
 }

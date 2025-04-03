@@ -226,19 +226,26 @@ namespace Assignment_2
 
 
         // Question 5: Decimal to Binary Conversion
+        // Initial thought, We can use the built-in Convert.ToString method to convert the decimal number to binary.
+        // We can check if the number is less than 0 or not. If it is less than 0, we can return an error message.
+        // Then we can use the Convert.ToString method to convert the decimal number to binary.
         public static string DecimalToBinary(int decimalNumber)
         {
             try
             {
                 if (decimalNumber < 0)
                     throw new ArgumentException("Decimal number must be non-negative.");
+                // Using the built-in Convert.ToString method to convert the decimal number to binary
                 return Convert.ToString(decimalNumber, 2);
             }
+            // If there are any exceptions, we are throwing the exception
             catch (ArgumentException ex)
             {
                 return $"Error: {ex.Message}";
             }
         }
+        // The time complexity of this solution is O(log n) because we are using the built-in Convert.ToString method to convert the decimal number to binary.
+        // space complexity is O(1) because we are not using any extra space to store the numbers.
 
         // Question 6: Find Minimum in Rotated Sorted Array
         public static int FindMin(int[] nums)

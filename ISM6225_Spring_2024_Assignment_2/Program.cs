@@ -58,13 +58,34 @@ namespace Assignment_2
         }
 
         // Question 1: Find Missing Numbers in Array
+        // Initial thought was to create an arraylist as it is dynamic in size since we don't know how many numbers are missing. But a more efficient way is to use a HashSet.
+        // What is a hashset? This allows us to store only the unique elements which are present in the given array. Discarding the duplicates
+        // After discrading the duplicates, we can loop through the length of the given array and check if the number is present in the hashset or not.
+        // If it is not present, we can add it to a LIST of missing numbers.
+        // What is a list? A list is dynamic in size and the elements in a list can be accessed using an index.
         public static IList<int> FindMissingNumbers(int[] nums)
         {
             try
             {
-                // Write your code here
-                return new List<int>(); // Placeholder
+                int n = nums.Length;
+                // Using a HashSet to track numbers and the missing ones to return
+                HashSet<int> numSet = new HashSet<int>(nums);
+                // we are creating a list to store the missing numbers
+                List<int> missingNum = new List<int>();
+                // Looping through the length of the given array.
+                for (int i = 1; i <= n; i++)
+                {
+                    // Checking if the number is present in the hashset or not.
+                    if (!numSet.Contains(i))
+                    {
+                        // If it is not present, we can add it to a LIST of missing numbers.
+                        missingNum.Add(i);
+                    }
+                }
+                // Returning the list of missing numbers
+                return missingNum;
             }
+            // IF there are any exceptions, we are throwing the exception
             catch (Exception)
             {
                 throw;
@@ -76,6 +97,9 @@ namespace Assignment_2
         {
             try
             {
+                // Using a List to store the even and odd numbers separately
+                //List<int> evenNumbers = new List<int>();
+                
                 // Write your code here
                 return new int[0]; // Placeholder
             }

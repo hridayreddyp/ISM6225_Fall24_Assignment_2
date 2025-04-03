@@ -34,7 +34,7 @@ namespace Assignment_2
 
             // Question 5: Decimal to Binary Conversion
             Console.WriteLine("Question 5:");
-            int decimalNumber = 42;
+            int decimalNumber = 142;
             string binary = DecimalToBinary(decimalNumber);
             Console.WriteLine(binary);
 
@@ -191,30 +191,52 @@ namespace Assignment_2
         // space complexity is O(n) because we are using a dictionary to store the numbers and their indices.
 
         // Question 4: Find Maximum Product of Three Numbers
+        // Initial Thought We can sort the array and then find the maximum product of the last three numbers which are the largest among them.
+        // Checking if the length of the array is less than 3 and returning the error message
+        // When it is greater than 3 elements, we first sort the elements in the array
+        // If the array contains 2 negative numbers and 1 positive number, then the product of the two negative numbers and the positive number might be greater than the product of the three positive numbers as the resultant number is positive.
+        // Then we can check if the product of the last three numbers is greater than the product of the first two numbers and the last number.
+
         public static int MaximumProduct(int[] nums)
         {
             try
             {
-                // Write your code here
-                return 0; // Placeholder
+                // checking if the array length is less than 3 or empty and returning the exception message
+                if (nums == null || nums.Length < 3)
+                {
+                    throw new ArgumentException("Array must contain at least three numbers.");
+                }
+                // Sorting the array
+                Array.Sort(nums);
+                int n = nums.Length;
+                // The maximum product can be either the product of the last three numbers or the product of the first two numbers(if they are both negative) and the last number
+                int maxProduct = Math.Max(nums[n - 1] * nums[n - 2] * nums[n - 3], nums[0] * nums[1] * nums[n - 1]);
+                return maxProduct; // Placeholder
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                // If there are any exceptions, we are throwing the exception
+                Console.WriteLine($"Error: {ex.Message}");
+                // Returning a default value
+                return int.MinValue;
             }
         }
+        // The time complexity of this solution is O(n log n) because we are sorting the array and then finding the maximum product of the last three numbers.
+        // space complexity is O(1) because we are not using any extra space to store the numbers.
+
 
         // Question 5: Decimal to Binary Conversion
         public static string DecimalToBinary(int decimalNumber)
         {
             try
             {
-                // Write your code here
-                return "101010"; // Placeholder
+                if (decimalNumber < 0)
+                    throw new ArgumentException("Decimal number must be non-negative.");
+                return Convert.ToString(decimalNumber, 2);
             }
-            catch (Exception)
+            catch (ArgumentException ex)
             {
-                throw;
+                return $"Error: {ex.Message}";
             }
         }
 
@@ -223,7 +245,7 @@ namespace Assignment_2
         {
             try
             {
-                // Write your code here
+                
                 return 0; // Placeholder
             }
             catch (Exception)

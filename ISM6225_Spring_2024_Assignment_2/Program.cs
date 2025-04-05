@@ -298,6 +298,10 @@ namespace Assignment_2
                 throw;
             }
         }
+        //The time complexity of the code has improved from O(n) for my initial idea, to O(log n) for the optimal code.
+        // The space complexity is O(1).
+
+
 
 
         // Question 7: Palindrome Number
@@ -346,7 +350,6 @@ namespace Assignment_2
         // If n=0, 1 we return 0,1 respectively as that is the fibonnaci series result.
         // Then we can use an iterative approach to calculate the Fibonacci number.
         // We can use two variables to store the previous two Fibonacci numbers and then calculate the next Fibonacci number by adding them.
-        // We can loop through the length of the given number and then return the nth Fibonacci number.
         public static int Fibonacci(int n)
         {
             

@@ -144,8 +144,6 @@ namespace Assignment_2
                         right--;
                     }
                 }
-
-                // Write your code here
                 return nums; // Placeholder
             }
             catch (Exception)
@@ -303,6 +301,11 @@ namespace Assignment_2
 
 
         // Question 7: Palindrome Number
+        //Initial thought was to find the the reverse and check if they both are the same. 
+        // First if the number is negitive we are going to explicitely declare that they are not a palindrome.
+        // Then reversing the original number and then comparing it with the original number.
+        // If they are the same then we return true else false.
+
         public static bool IsPalindrome(int x)
         {
             try
@@ -338,7 +341,12 @@ namespace Assignment_2
 
 
         // Question 8: Fibonacci Number
-        //Initial thought, 
+        //Initial thought, we first find the fibonnaci of each of the digits and then add them to return them.
+        // First we check, if the number is non negative only then we can proceed. If it is negative, then they cannot be processed
+        // If n=0, 1 we return 0,1 respectively as that is the fibonnaci series result.
+        // Then we can use an iterative approach to calculate the Fibonacci number.
+        // We can use two variables to store the previous two Fibonacci numbers and then calculate the next Fibonacci number by adding them.
+        // We can loop through the length of the given number and then return the nth Fibonacci number.
         public static int Fibonacci(int n)
         {
             
